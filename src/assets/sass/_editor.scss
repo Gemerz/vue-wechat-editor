@@ -1,0 +1,186 @@
+
+.wechat-editor-wrap {
+  background: url('./assets/mobile-warp.png') no-repeat 0 0 ;
+  display: inline-block;
+  padding-right: 40px;
+
+}
+.editor{
+  position: relative;
+}
+.wechat-editor {
+  float: left;
+  width: 349px;
+  height: 730px;
+  padding: 58px 0 58px 5px;
+  position: relative;
+
+  .editor-preview {
+    width: 100%;
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-select: none;
+    position: relative;
+  }
+  .preview-items {
+    width: 100%;
+  }
+  .editor-add {
+    padding: 14px 15px;
+    border-top: 1px solid #ddd;
+    display: block;
+    .editor-add-btn {
+      cursor: pointer;
+      display: block;
+      padding: 17px 0;
+      text-align: center;
+      border: 2px dotted #ccc;
+      color: #bbb;
+      &:hover {
+        i {
+          color: rgb(161, 240, 137);
+        }
+      }
+    }
+  }
+  .editor-item {
+    position: relative;
+    min-height: 90px;
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+    .editor-item-edit {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      position: absolute;
+      text-align: center;
+      top: 0;
+      &:before {
+        display: inline-block;
+        content: '';
+        vertical-align: middle;
+        height: 100%;
+      }
+      a {
+        color: #ffffff;
+        margin: 0 5px;
+        vertical-align: middle;
+        display: inline-block;
+      }
+    }
+    .cover {
+      background: #eeeeee;
+      height: 200px;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      &:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        height: 100%;
+      }
+      .cover-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: block;
+        height: auto;
+      }
+      .thumbnail-holder {
+        margin-top: -10px;
+      }
+    }
+    .title {
+      color: #ffffff;
+      width: 100%;
+      top: auto;
+      line-height: 1.2;
+      height: auto;
+      min-height: 30px;
+      bottom: -15px;
+      padding: 8px 10px;
+      background: rgb(161, 240, 137);
+      position: absolute;
+      text-align: left;
+      margin: 0;
+    }
+
+    .thumbnail-holder {
+      display: inline-block;
+      &:before {
+        content: '缩略图';
+      }
+    }
+
+    .thumbnail {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 60px;
+      height: 60px;
+      background: #eeeeee;
+      border: 1px solid #dddddd;
+      &:after {
+        content: '缩略图';
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        line-height: 60px;
+      }
+    }
+
+    &:hover {
+      .editor-item-edit {
+        display: block;
+      }
+    }
+
+  }
+  .active-arrow{
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 100%;
+    height: 20px;
+    transition: top .3s linear;
+    &:before{
+      content: "\f0da";
+      font-family: FontAwesome;
+      color: rgb(161, 240, 137);
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      left: -20px;
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      font-size: 28px;
+    }
+    &:after{
+      content: "\f0d9";
+      font-family: FontAwesome;
+      color: rgb(161, 240, 137);
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      right: -40px;
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      font-size: 28px;
+
+    }
+  }
+
+}
+
+

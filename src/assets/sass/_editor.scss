@@ -14,6 +14,11 @@
   height: 730px;
   padding: 58px 0 58px 5px;
   position: relative;
+  .editor{
+    max-height: 597px;
+    min-height: 597px;
+    overflow-y: scroll;
+  }
 
   .editor-preview {
     width: 100%;
@@ -68,6 +73,16 @@
         margin: 0 5px;
         vertical-align: middle;
         display: inline-block;
+      }
+      .sort-pannel{
+        height: 100%;
+        width: 80px;
+        position: absolute;
+        top:0;
+        left: 0;
+        a{
+          color: #ffffff;
+        }
       }
     }
     .cover {

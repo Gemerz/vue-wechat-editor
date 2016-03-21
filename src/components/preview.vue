@@ -4,7 +4,8 @@
       <div class='wechat-editor'>
         <div class='editor'>
           <div class='editor-item' v-for="preview in items">
-            <div v-if="preview.data.type =='cover'">
+            <div v-if="preview.data.type =='cover'" class="cover-coantainer">
+
               <div class='cover'>
                 <img class='cover-img'/>
                 <span class='thumbnail-holder'></span>
@@ -23,19 +24,20 @@
                     <i id="pv-delete-button" class="material-icons">delete</i>
                   </a>
                   <div class="sort-pannel">
-                    <a>
-                      <i class="up material-icons">keyboard_arrow_up</i>
+                    <a class="up" v-show="preview.key > 0">
+
+                      <i class=" material-icons">keyboard_arrow_up</i>
                     </a>
-                    <a>
-                      <i class=" down material-icons">keyboard_arrow_down</i>
+                    <a class="down">
+                      <i class="material-icons">keyboard_arrow_down</i>
                     </a>
                   </div>
 
                 </div>
               </div>
             </div>
-            <div v-else>
-              <div class='editor-item'>
+            <div v-else class="list-coantainer">
+              <div class='list'>
               <span class='thumbnail'>
               </span>
                 <div class='editor-item-edit'>
@@ -51,7 +53,14 @@
                     <mdl-tooltip for="{{preview.key}}pv-delete-button">删除</mdl-tooltip>
                     <i id="{{preview.key}}pv-delete-button" class="material-icons">delete</i>
                   </a>
-
+                  <div class="sort-pannel">
+                    <a class="up" v-show="preview.key >0">
+                      <i class=" material-icons">keyboard_arrow_up</i>
+                    </a>
+                    <a class="down" v-show="preview.key < previews.length">
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

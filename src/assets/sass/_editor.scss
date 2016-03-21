@@ -1,20 +1,22 @@
 
 .wechat-editor-wrap {
-  background: url('./assets/mobile-warp.png') no-repeat 0 0 ;
+  background: url('./assets/mobile-warp.png') no-repeat 0 0;
   display: inline-block;
   padding-right: 40px;
 
 }
-.editor{
+
+.editor {
   position: relative;
 }
+
 .wechat-editor {
   float: left;
   width: 349px;
   height: 730px;
   padding: 58px 0 58px 5px;
   position: relative;
-  .editor{
+  .editor {
     max-height: 597px;
     min-height: 597px;
     overflow-y: scroll;
@@ -74,14 +76,24 @@
         vertical-align: middle;
         display: inline-block;
       }
-      .sort-pannel{
+      .sort-pannel {
         height: 100%;
         width: 80px;
         position: absolute;
-        top:0;
+        top: 0;
         left: 0;
-        a{
+        a {
           color: #ffffff;
+          &.up {
+            position: absolute;
+            top: 5px;
+            left: 45%;
+          }
+          &.down {
+            position: absolute;
+            bottom: 5px;
+            left: 45%;
+          }
         }
       }
     }
@@ -157,15 +169,25 @@
       }
     }
 
+    .cover-coantainer {
+      .editor-item-edit .sort-pannel {
+        a.up {
+          top: 15px;
+        }
+        a.down {
+          bottom: 15px;
+        }
+      }
+    }
   }
-  .active-arrow{
+  .active-arrow {
     position: absolute;
     left: 0;
     top: 60px;
     width: 100%;
     height: 20px;
     transition: top .3s linear;
-    &:before{
+    &:before {
       content: "\f0da";
       font-family: FontAwesome;
       color: rgb(161, 240, 137);
@@ -179,7 +201,7 @@
       text-decoration: inherit;
       font-size: 28px;
     }
-    &:after{
+    &:after {
       content: "\f0d9";
       font-family: FontAwesome;
       color: rgb(161, 240, 137);
@@ -196,6 +218,6 @@
     }
   }
 
-}
 
+}
 

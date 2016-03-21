@@ -24,11 +24,10 @@
                     <i id="pv-delete-button" class="material-icons">delete</i>
                   </a>
                   <div class="sort-pannel">
-                    <a class="up" v-show="preview.key > 0">
-
-                      <i class=" material-icons">keyboard_arrow_up</i>
+                    <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
+                      <i class="material-icons">keyboard_arrow_up</i>
                     </a>
-                    <a class="down">
+                    <a class="down" @click="sortDown(preview.key)">
                       <i class="material-icons">keyboard_arrow_down</i>
                     </a>
                   </div>
@@ -54,10 +53,10 @@
                     <i id="{{preview.key}}pv-delete-button" class="material-icons">delete</i>
                   </a>
                   <div class="sort-pannel">
-                    <a class="up" v-show="preview.key >0">
+                    <a class="up" v-show="preview.key >0" @click="sortUp(preview.key)">
                       <i class=" material-icons">keyboard_arrow_up</i>
                     </a>
-                    <a class="down" v-show="preview.key < previews.length">
+                    <a class="down" v-show="preview.key < previews.length" @click="sortDown(preview.key)">
                       <i class="material-icons">keyboard_arrow_down</i>
                     </a>
                   </div>
@@ -134,7 +133,13 @@
         })
         this.items.push(newPreview)
         this.previews = store.get('previewST')
-        console.log(this.previews)
+      },
+      sortUp: function (key) {
+        console.log(key)
+      },
+      sortDown: function (key) {
+        this.previews = store.get('previewST')
+        console.log(Object.keys(this.previews))
       }
     }
   }

@@ -128,13 +128,19 @@
       top: auto;
       line-height: 1.2;
       height: auto;
-      min-height: 30px;
+      min-height: 40px;
+      font-size: 18px;
       bottom: -15px;
       padding: 8px 10px;
       background: rgb(161, 240, 137);
       position: absolute;
       text-align: left;
       margin: 0;
+    }
+    .list-title{
+      padding: 8px 10px;
+      display: inline-block;
+      font-size: 14px;
     }
 
     .thumbnail-holder {
@@ -218,6 +224,11 @@
     }
   }
 
-
 }
-
+.mdl-button--raised.mdl-button--colored{
+  background: #a1f089;
+  color: #ffffff;
+}
+.upload-field{
+    min-height: 110px;
+}

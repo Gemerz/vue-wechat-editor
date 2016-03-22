@@ -39,6 +39,7 @@
                 </div>
                 <div v-else class="list-coantainer">
                   <div class='list'>
+                    <h4 class='list-title'>{{preview.data.title}}</h4>
                     <span class='thumbnail'></span>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
                       <a>
@@ -83,6 +84,21 @@
       <form>
         <mdl-textfield floating-label="标题：" :value.sync="preview.data.title" @blur="updateFeild"></mdl-textfield>
         <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
+
+        <div class="mdl-textfield mdl-js-textfield upload-field">
+          <div v-show="preview.data.type === 'cover'">
+            <label class="mdl-textfield__label">封面：(大图片建议尺寸：900像素*500像素 格式：png、gif、jpg）</label>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+              <i class="material-icons">&#xE864;</i>
+            </a>
+          </div>
+          <div v-show="preview.data.type === 'list'">
+            <label class="mdl-textfield__label">封面：（小图片建议尺寸：200像素 * 200像素 格式：png、gif、jpg）</label>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+              <i class="material-icons">&#xE864;</i>
+            </a>
+          </div>
+        </div>
       </form>
     </div>
 
@@ -132,12 +148,14 @@
         let newPreview = Object.assign({}, this.previews[this.tempKey - 1], {
           key: this.tempKey++, data: {
             type: 'list',
-            title: '2',
+            title: '',
+            author: '',
             cover: '',
             content: ''
           }
         })
         this.previews.push(newPreview)
+        this.editPreviewStyle(this.previews.length - 1)
       },
       sortUp: function (key) {
         if (this.previews.length > 1) {
@@ -145,6 +163,7 @@
             key: key - 1, data: {
               type: (key - 1) === 0 ? 'cover' : 'list',
               title: this.previews[key].data.title,
+              author: this.previews[key].data.author,
               cover: this.previews[key].data.cover,
               content: this.previews[key].data.content
             }
@@ -153,6 +172,7 @@
             key: key, data: {
               type: (key) === 0 ? 'cover' : 'list',
               title: this.previews[key - 1].data.title,
+              author: this.previews[key - 1].data.author,
               cover: this.previews[key - 1].data.cover,
               content: this.previews[key - 1].data.content
             }
@@ -174,6 +194,7 @@
             key: key + 1, data: {
               type: (key + 1) === 0 ? 'cover' : 'list',
               title: this.previews[key].data.title,
+              author: this.previews[key].data.author,
               cover: this.previews[key].data.cover,
               content: this.previews[key].data.content
             }
@@ -182,6 +203,7 @@
             key: key, data: {
               type: (key) === 0 ? 'cover' : 'list',
               title: this.previews[key + 1].data.title,
+              author: this.previews[key + 1].data.author,
               cover: this.previews[key + 1].data.cover,
               content: this.previews[key + 1].data.content
             }

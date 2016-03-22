@@ -18,8 +18,8 @@
                         <i id="pv-edit-button" class="material-icons">photo</i>
                       </a>
                       <a data-tip data-for='icon-edit' href='javascript:void(0)'>
-                        <mdl-tooltip for="pv-add-button">新增</mdl-tooltip>
-                        <i id="pv-add-button" class="material-icons">add</i>
+                        <mdl-tooltip for="pv-add-button">編輯</mdl-tooltip>
+                        <i id="pv-add-button" class="material-icons">&#xE150;</i>
                       </a>
                       <a data-tip data-for='icon-delete' href='javascript:void(0)'>
                         <mdl-tooltip for="pv-delete-button">删除</mdl-tooltip>
@@ -27,10 +27,12 @@
                       </a>
                       <div class="sort-pannel">
                         <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
-                          <i class="material-icons">keyboard_arrow_up</i>
+                          <mdl-tooltip for="cover-btn-up">上移</mdl-tooltip>
+                          <i id="cover-btn-up" class="material-icons">keyboard_arrow_up</i>
                         </a>
                         <a class="down" @click="sortDown(preview.key)">
-                          <i class="material-icons">keyboard_arrow_down</i>
+                          <mdl-tooltip for="cover-btn-down">下移</mdl-tooltip>
+                          <i id="cover-btn-down" class="material-icons">keyboard_arrow_down</i>
                         </a>
                       </div>
 
@@ -43,23 +45,25 @@
                     <span class='thumbnail'></span>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
                       <a>
-                        <mdl-tooltip for='@preview.key-pv-edit-button'>浏览</mdl-tooltip>
-                        <i id="{{preview.key}}-pv-edit-button" class="material-icons">photo</i>
+                        <mdl-tooltip for="PRI-1">浏览</mdl-tooltip>
+                        <i id="PRI-1" class="material-icons">photo</i>
                       </a>
                       <a>
-                        <mdl-tooltip for="{{preview.key}}pv-add-button">新增</mdl-tooltip>
-                        <i id="{{preview.key}}pv-add-button" class="material-icons">add</i>
+                        <mdl-tooltip for="PRI-2">編輯</mdl-tooltip>
+                        <i id="PRI-2" class="material-icons">&#xE150;</i>
                       </a>
                       <a>
-                        <mdl-tooltip for="{{preview.key}}pv-delete-button">删除</mdl-tooltip>
-                        <i id="{{preview.key}}pv-delete-button" class="material-icons">delete</i>
+                        <mdl-tooltip for="PRI-3">删除</mdl-tooltip>
+                        <i id="PRI-3" class="material-icons">delete</i>
                       </a>
                       <div class="sort-pannel">
                         <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
-                          <i class=" material-icons">keyboard_arrow_up</i>
+                          <mdl-tooltip for="list-btn-up">上移</mdl-tooltip>
+                          <i id="list-btn-up" class=" material-icons">keyboard_arrow_up</i>
                         </a>
                         <a class="down" v-show="preview.key < previews.length - 1" @click="sortDown(preview.key)">
-                          <i class="material-icons">keyboard_arrow_down</i>
+                          <mdl-tooltip for="list-btn-down">下移</mdl-tooltip>
+                          <i id="list-btn-down" class="material-icons">keyboard_arrow_down</i>
                         </a>
                       </div>
                     </div>
@@ -80,7 +84,7 @@
     </div>
   </div>
   <div class="mdl-cell mdl-cell--7-col">
-    <div class="forms" v-for="preview in previews " v-show="preview.key ===currentKey">
+    <div class="forms" v-for="preview in previews" v-show="preview.key ===currentKey">
       <form>
         <mdl-textfield floating-label="标题：" :value.sync="preview.data.title" @blur="updateFeild"></mdl-textfield>
         <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
@@ -99,6 +103,10 @@
             </a>
           </div>
         </div>
+        <div v-show="preview.data.type === 'cover'">
+          <mdl-textfield floating-label="摘要：（选填，该摘要只在发送图文消息为单条时显示）" textarea rows="4">{{}}</mdl-textfield>
+        </div>
+
       </form>
     </div>
 
@@ -106,7 +114,7 @@
 </template>
 
 <script>
-  import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle} from 'vue-mdl'
+  import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle, MdlCheckbox} from 'vue-mdl'
   import store from 'store'
   //  import Immutable from 'immutable'
   let initItem = [{
@@ -134,7 +142,8 @@
       MdlTooltip,
       MdlButton,
       MdlTextfield,
-      MdlIconToggle
+      MdlIconToggle,
+      MdlCheckbox
     },
     watch: {
       previews: {

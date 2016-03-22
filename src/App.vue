@@ -1,13 +1,10 @@
 <template>
   <div id="app">
-
-
     <div class="mdl-grid">
       <preview class="mdl-cell mdl-cell--5-col"></preview>
       <div class="mdl-cell mdl-cell--7-col">
         <forms></forms>
       </div>
-
 
     </div>
 

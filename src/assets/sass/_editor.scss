@@ -17,9 +17,9 @@
   padding: 58px 0 58px 5px;
   position: relative;
   .editor {
-    max-height: 597px;
-    min-height: 597px;
-    overflow-y: scroll;
+    //max-height: 597px;
+    //min-height: 597px;
+    //overflow-y: scroll;
   }
 
   .editor-preview {
@@ -188,13 +188,13 @@
     height: 20px;
     transition: top .3s linear;
     &:before {
-      content: "\f0da";
-      font-family: FontAwesome;
+      content: '\e5cb';
+      font-family: 'Material Icons';
       color: rgb(161, 240, 137);
       width: 32px;
       height: 32px;
       position: absolute;
-      left: -20px;
+      left: -40px;
       font-weight: normal;
       font-style: normal;
       display: inline-block;
@@ -202,8 +202,8 @@
       font-size: 28px;
     }
     &:after {
-      content: "\f0d9";
-      font-family: FontAwesome;
+      content: '\e5cc';
+      font-family: 'Material Icons';
       color: rgb(161, 240, 137);
       width: 32px;
       height: 32px;

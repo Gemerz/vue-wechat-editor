@@ -3,9 +3,8 @@
     <div class='wechat-editor-wrap'>
       <div class='wechat-editor'>
         <div class='editor'>
-          <div class='editor-item' v-for="preview in items">
+          <div class='editor-item' v-for="preview in previews | orderBy 'key'">
             <div v-if="preview.data.type =='cover'" class="cover-coantainer">
-
               <div class='cover'>
                 <img class='cover-img'/>
                 <span class='thumbnail-holder'></span>
@@ -53,10 +52,10 @@
                     <i id="{{preview.key}}pv-delete-button" class="material-icons">delete</i>
                   </a>
                   <div class="sort-pannel">
-                    <a class="up" v-show="preview.key >0" @click="sortUp(preview.key)">
+                    <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
                       <i class=" material-icons">keyboard_arrow_up</i>
                     </a>
-                    <a class="down" v-show="preview.key < previews.length" @click="sortDown(preview.key)">
+                    <a class="down" v-show="preview.key < previews.length - 1" @click="sortDown(preview.key)">
                       <i class="material-icons">keyboard_arrow_down</i>
                     </a>
                   </div>
@@ -82,24 +81,23 @@
 <script>
   import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle} from 'vue-mdl'
   import store from 'store'
+  //  import Immutable from 'immutable'
   let initItem = [{
     key: 0, data: {
       type: 'cover',
-      title: '',
+      title: '1',
       cover: '',
       content: ''
     }
   }]
   store.set('previewST', initItem)
-  //  const previewST = store.get('previewST')
   export default {
     data () {
       return {
-        previews: store.get('previewST'),
+        previews: initItem,
         newPreview: '',
         editedPreview: null,
-        tempKey: 1,
-        items: initItem
+        tempKey: 1
       }
     },
     components: {
@@ -111,35 +109,55 @@
     watch: {
       previews: {
         handler: function (previews) {
-          store.get('previewST', previews)
+          store.set('previewST', previews)
         }
-      },
-      items: {
-        handler: function (items) {
-          store.set('previewST', items)
-        },
-        deep: true
       }
     },
     methods: {
       addPreview: function () {
-        let newPreview = Object.assign({}, initItem[this.tempKey - 1], {
+        let newPreview = Object.assign({}, this.previews[this.tempKey - 1], {
           key: this.tempKey++, data: {
             type: 'list',
-            title: '',
+            title: '2',
             cover: '',
             content: ''
           }
         })
-        this.items.push(newPreview)
-        this.previews = store.get('previewST')
+        this.previews.push(newPreview)
       },
       sortUp: function (key) {
         console.log(key)
       },
       sortDown: function (key) {
-        this.previews = store.get('previewST')
-        console.log(Object.keys(this.previews))
+        if (this.previews.length > 1) {
+          this.previews[key] = Object.assign(this.previews[key], {
+            key: key + 1, data: {
+              type: (key + 1) === 0 ? 'cover' : 'list',
+              title: this.previews[key].data.title,
+              cover: this.previews[key].data.cover,
+              content: this.previews[key].data.content
+            }
+          })
+          this.previews[key + 1] = Object.assign(this.previews[key + 1], {
+            key: key, data: {
+              type: (key) === 0 ? 'cover' : 'list',
+              title: this.previews[key + 1].data.title,
+              cover: this.previews[key + 1].data.cover,
+              content: this.previews[key + 1].data.content
+            }
+          })
+        }
+        this.previews.sort(function (a, b) {
+          if (a.key < b.key) {
+            console.log('1')
+            return -1
+          } else if (a.key > b.key) {
+            return 1
+          } else {
+            return 0
+          }
+        })
+        console.log(this.previews)
       }
     }
   }

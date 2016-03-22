@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <div class="mdl-grid">
-      <preview class="mdl-cell mdl-cell--5-col"></preview>
-      <div class="mdl-cell mdl-cell--7-col">
-        <forms></forms>
-      </div>
+      <preview></preview>
 
     </div>
 
@@ -13,13 +10,11 @@
 
 <script>
   import Preview from './components/preview'
-  import Forms from './components/forms'
   import 'material-design-lite/material'
 
   export default {
     components: {
-      Preview,
-      Forms
+      Preview
     }
   }
 </script>

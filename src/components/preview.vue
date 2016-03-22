@@ -1,80 +1,89 @@
 <template>
-  <div id="wechat-editor">
-    <div class='wechat-editor-wrap'>
-      <div class='wechat-editor'>
-        <div class='editor'>
-          <div class="active-arrow" :style="{ top: activeArrowStyle + 'px' }"></div>
-          <div class="editor-preview">
-            <div class='editor-item' v-for="preview in previews | orderBy 'key'">
-              <div v-if="preview.data.type =='cover'" class="cover-coantainer">
-                <div class='cover'>
-                  <img class='cover-img'/>
-                  <span class='thumbnail-holder'></span>
-                  <h4 class='title'></h4>
-                  <div class='editor-item-edit' @click="editPreview(preview.key)">
-                    <a data-tip data-for='icon-preview'>
-                      <mdl-tooltip for="pv-edit-button">浏览</mdl-tooltip>
-                      <i id="pv-edit-button" class="material-icons">photo</i>
-                    </a>
-                    <a data-tip data-for='icon-edit' href='javascript:void(0)'>
-                      <mdl-tooltip for="pv-add-button">新增</mdl-tooltip>
-                      <i id="pv-add-button" class="material-icons">add</i>
-                    </a>
-                    <a data-tip data-for='icon-delete' href='javascript:void(0)'>
-                      <mdl-tooltip for="pv-delete-button">删除</mdl-tooltip>
-                      <i id="pv-delete-button" class="material-icons">delete</i>
-                    </a>
-                    <div class="sort-pannel">
-                      <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
-                        <i class="material-icons">keyboard_arrow_up</i>
+  <div class="mdl-cell mdl-cell--5-col">
+    <div id="wechat-editor">
+      <div class='wechat-editor-wrap'>
+        <div class='wechat-editor'>
+          <div class='editor'>
+            <div class="active-arrow" :style="{ top: activeArrowStyle + 'px' }"></div>
+            <div class="editor-preview">
+              <div class='editor-item' v-for="preview in previews | orderBy 'key'">
+                <div v-if="preview.data.type =='cover'" class="cover-coantainer">
+                  <div class='cover'>
+                    <img class='cover-img'/>
+                    <span class='thumbnail-holder'></span>
+                    <h4 class='title'>{{preview.data.title}}</h4>
+                    <div class='editor-item-edit' @click="editPreview(preview.key)">
+                      <a data-tip data-for='icon-preview'>
+                        <mdl-tooltip for="pv-edit-button">浏览</mdl-tooltip>
+                        <i id="pv-edit-button" class="material-icons">photo</i>
                       </a>
-                      <a class="down" @click="sortDown(preview.key)">
-                        <i class="material-icons">keyboard_arrow_down</i>
+                      <a data-tip data-for='icon-edit' href='javascript:void(0)'>
+                        <mdl-tooltip for="pv-add-button">新增</mdl-tooltip>
+                        <i id="pv-add-button" class="material-icons">add</i>
                       </a>
-                    </div>
+                      <a data-tip data-for='icon-delete' href='javascript:void(0)'>
+                        <mdl-tooltip for="pv-delete-button">删除</mdl-tooltip>
+                        <i id="pv-delete-button" class="material-icons">delete</i>
+                      </a>
+                      <div class="sort-pannel">
+                        <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
+                          <i class="material-icons">keyboard_arrow_up</i>
+                        </a>
+                        <a class="down" @click="sortDown(preview.key)">
+                          <i class="material-icons">keyboard_arrow_down</i>
+                        </a>
+                      </div>
 
-                  </div>
-                </div>
-              </div>
-              <div v-else class="list-coantainer">
-                <div class='list'>
-              <span class='thumbnail'>
-              </span>
-                  <div class='editor-item-edit' @click="editPreview(preview.key)">
-                    <a>
-                      <mdl-tooltip for='@preview.key-pv-edit-button'>浏览</mdl-tooltip>
-                      <i id="{{preview.key}}-pv-edit-button" class="material-icons">photo</i>
-                    </a>
-                    <a>
-                      <mdl-tooltip for="{{preview.key}}pv-add-button">新增</mdl-tooltip>
-                      <i id="{{preview.key}}pv-add-button" class="material-icons">add</i>
-                    </a>
-                    <a>
-                      <mdl-tooltip for="{{preview.key}}pv-delete-button">删除</mdl-tooltip>
-                      <i id="{{preview.key}}pv-delete-button" class="material-icons">delete</i>
-                    </a>
-                    <div class="sort-pannel">
-                      <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
-                        <i class=" material-icons">keyboard_arrow_up</i>
-                      </a>
-                      <a class="down" v-show="preview.key < previews.length - 1" @click="sortDown(preview.key)">
-                        <i class="material-icons">keyboard_arrow_down</i>
-                      </a>
                     </div>
                   </div>
                 </div>
-              </div>
+                <div v-else class="list-coantainer">
+                  <div class='list'>
+                    <span class='thumbnail'></span>
+                    <div class='editor-item-edit' @click="editPreview(preview.key)">
+                      <a>
+                        <mdl-tooltip for='@preview.key-pv-edit-button'>浏览</mdl-tooltip>
+                        <i id="{{preview.key}}-pv-edit-button" class="material-icons">photo</i>
+                      </a>
+                      <a>
+                        <mdl-tooltip for="{{preview.key}}pv-add-button">新增</mdl-tooltip>
+                        <i id="{{preview.key}}pv-add-button" class="material-icons">add</i>
+                      </a>
+                      <a>
+                        <mdl-tooltip for="{{preview.key}}pv-delete-button">删除</mdl-tooltip>
+                        <i id="{{preview.key}}pv-delete-button" class="material-icons">delete</i>
+                      </a>
+                      <div class="sort-pannel">
+                        <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
+                          <i class=" material-icons">keyboard_arrow_up</i>
+                        </a>
+                        <a class="down" v-show="preview.key < previews.length - 1" @click="sortDown(preview.key)">
+                          <i class="material-icons">keyboard_arrow_down</i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            </div>
-            <div class="editor-add">
-              <a class="editor-add-btn" @click="addPreview">
-                <mdl-tooltip for="editor-add-button">新增</mdl-tooltip>
-                <i id="editor-add-button" class="material-icons">add</i>
-              </a>
+              </div>
+              <div class="editor-add">
+                <a class="editor-add-btn" @click="addPreview">
+                  <mdl-tooltip for="editor-add-button">新增</mdl-tooltip>
+                  <i id="editor-add-button" class="material-icons">add</i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="mdl-cell mdl-cell--7-col">
+    <div class="forms" v-for="preview in previews " v-show="preview.key ===currentKey">
+      <form>
+        <mdl-textfield floating-label="标题：" :value.sync="preview.data.title" @blur="updateFeild"></mdl-textfield>
+        <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
+      </form>
     </div>
 
   </div>
@@ -88,6 +97,7 @@
     key: 0, data: {
       type: 'cover',
       title: '',
+      author: '',
       cover: '',
       content: ''
     }
@@ -100,7 +110,8 @@
         newPreview: '',
         editedPreview: null,
         tempKey: 1,
-        activeArrowStyle: 90
+        activeArrowStyle: 90,
+        currentKey: 0
       }
     },
     components: {
@@ -156,7 +167,6 @@
             return 0
           }
         })
-        console.log(this.previews)
       },
       sortDown: function (key) {
         if (this.previews.length > 1) {
@@ -190,7 +200,7 @@
       editPreview: function (key) {
         this.editPreviewStyle(key)
         this.editedPreview = this.previews[key]
-        console.log(this.editedPreview)
+        this.currentKey = key
       },
       editPreviewStyle: function (key) {
         if (key === 0) {
@@ -200,7 +210,19 @@
         } else {
           this.activeArrowStyle = 240 + (90 * (key - 1))
         }
+      },
+      updateFeild: function () {
+        console.log(this.previews)
       }
     }
   }
 </script>
+<style lang="sass?outputStyle=expanded">
+  .mdl-textfield {
+    width: 100%;
+  }
+
+  .forms {
+    padding: 15px;
+  }
+</style>

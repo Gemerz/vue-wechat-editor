@@ -12,16 +12,16 @@
                     <img class='cover-img'/>
                     <span class='thumbnail-holder'></span>
                     <h4 class='title'>{{preview.data.title}}</h4>
-                    <div class='editor-item-edit ' @click="editPreview(preview.key)">
-                      <a data-tip data-for='icon-preview'>
+                    <div class='editor-item-edit' @click="editPreview(preview.key)">
+                      <a>
                         <mdl-tooltip for="pv-edit-button">浏览</mdl-tooltip>
                         <i id="pv-edit-button" class="material-icons">photo</i>
                       </a>
-                      <a data-tip data-for='icon-edit' href='javascript:void(0)'>
+                      <a @click="editPreview(preview.key)">
                         <mdl-tooltip for="pv-add-button">編輯</mdl-tooltip>
                         <i id="pv-add-button" class="material-icons">&#xE150;</i>
                       </a>
-                      <a data-tip data-for='icon-delete' href='javascript:void(0)'>
+                      <a @click="deleltePreviews(preview.key)">
                         <mdl-tooltip for="pv-delete-button">删除</mdl-tooltip>
                         <i id="pv-delete-button" class="material-icons">delete</i>
                       </a>
@@ -48,11 +48,11 @@
                         <mdl-tooltip :for="'view-'+preview.key">浏览</mdl-tooltip>
                         <i :id="'view-'+preview.key" class="material-icons">photo</i>
                       </a>
-                      <a>
+                      <a @click="editPreview(preview.key)">
                         <mdl-tooltip :for="'edit-'+preview.key">編輯</mdl-tooltip>
                         <i :id="'edit-'+preview.key" class="material-icons">&#xE150;</i>
                       </a>
-                      <a>
+                      <a @click="deleltePreviews(preview.key)">
                         <mdl-tooltip :for="'del-'+preview.key">删除</mdl-tooltip>
                         <i :id="'del-'+preview.key" class="material-icons">delete</i>
                       </a>
@@ -86,10 +86,11 @@
   <div class="mdl-cell mdl-cell--7-col">
     <forms :previews="previews" :current-index="currentKey"></forms>
   </div>
+  <mdl-snackbar display-on="noticePreview"></mdl-snackbar>
 </template>
 
 <script>
-  import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle, MdlCheckbox} from 'vue-mdl'
+  import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle, MdlCheckbox, MdlSnackbar} from 'vue-mdl'
   import store from 'store'
   import forms from './forms.vue'
   //  import Immutable from 'immutable'
@@ -121,11 +122,13 @@
       MdlTextfield,
       MdlIconToggle,
       MdlCheckbox,
+      MdlSnackbar,
       forms
     },
     watch: {
       previews: {
         handler: function (previews) {
+          console.log(previews)
           store.set('previewST', previews)
         }
       }
@@ -142,7 +145,7 @@
           }
         })
         this.previews.push(newPreview)
-        this.editPreviewStyle(this.previews.length - 1)
+        this._editPreviewStyle(this.previews.length - 1)
       },
       sortUp: function (key) {
         if (this.previews.length > 1) {
@@ -207,11 +210,11 @@
         })
       },
       editPreview: function (key) {
-        this.editPreviewStyle(key)
+        this._editPreviewStyle(key)
         this.editedPreview = this.previews[key]
         this.currentKey = key
       },
-      editPreviewStyle: function (key) {
+      _editPreviewStyle: function (key) {
         if (key === 0) {
           this.activeArrowStyle = 90
         } else if (key === 1) {
@@ -223,7 +226,16 @@
       updateFeild: function () {
         console.log(this.previews)
       },
-      uploadFile: function () {
+      deleltePreviews: function (key) {
+        if (key > 0) {
+          this.previews.splice(key, 1)
+          this._sortDelelte(key)
+        } else {
+          this.$broadcast('noticePreview', {message: '最少保留一條條文信息'})
+        }
+      },
+      _sortDelelte: function (key) {
+
       }
     }
   }

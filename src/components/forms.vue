@@ -1,5 +1,4 @@
 <template>
-{{currentIndex}}
   <div class="forms" v-for="preview in previews" v-show="preview.key ===currentIndex">
     <form>
       <mdl-textfield floating-label="标题：" :value.sync="preview.data.title"></mdl-textfield>

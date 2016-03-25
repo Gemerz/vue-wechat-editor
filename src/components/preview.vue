@@ -12,7 +12,7 @@
                     <img class='cover-img'/>
                     <span class='thumbnail-holder'></span>
                     <h4 class='title'>{{preview.data.title}}</h4>
-                    <div class='editor-item-edit' @click="editPreview(preview.key)">
+                    <div class='editor-item-edit ' @click="editPreview(preview.key)">
                       <a data-tip data-for='icon-preview'>
                         <mdl-tooltip for="pv-edit-button">浏览</mdl-tooltip>
                         <i id="pv-edit-button" class="material-icons">photo</i>
@@ -45,16 +45,16 @@
                     <span class='thumbnail'></span>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
                       <a>
-                        <mdl-tooltip for="PRI-1">浏览</mdl-tooltip>
-                        <i id="PRI-1" class="material-icons">photo</i>
+                        <mdl-tooltip :for="'view-'+preview.key">浏览</mdl-tooltip>
+                        <i :id="'view-'+preview.key" class="material-icons">photo</i>
                       </a>
                       <a>
-                        <mdl-tooltip for="PRI-2">編輯</mdl-tooltip>
-                        <i id="PRI-2" class="material-icons">&#xE150;</i>
+                        <mdl-tooltip :for="'edit-'+preview.key">編輯</mdl-tooltip>
+                        <i :id="'edit-'+preview.key" class="material-icons">&#xE150;</i>
                       </a>
                       <a>
-                        <mdl-tooltip for="PRI-3">删除</mdl-tooltip>
-                        <i id="PRI-3" class="material-icons">delete</i>
+                        <mdl-tooltip :for="'del-'+preview.key">删除</mdl-tooltip>
+                        <i :id="'del-'+preview.key" class="material-icons">delete</i>
                       </a>
                       <div class="sort-pannel">
                         <a class="up" v-show="preview.key > 0" @click="sortUp(preview.key)">
@@ -86,7 +86,7 @@
   <div class="mdl-cell mdl-cell--7-col">
     <div class="forms" v-for="preview in previews" v-show="preview.key ===currentKey">
       <form>
-        <mdl-textfield floating-label="标题：" :value.sync="preview.data.title" @blur="updateFeild"></mdl-textfield>
+        <mdl-textfield floating-label="标题：" :value.sync="preview.data.title"></mdl-textfield>
         <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
 
         <div class="mdl-textfield mdl-js-textfield upload-field">
@@ -95,6 +95,7 @@
             <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
               <i class="material-icons">&#xE864;</i>
             </a>
+            <input type="file"/>
           </div>
           <div v-show="preview.data.type === 'list'">
             <label class="mdl-textfield__label">封面：（小图片建议尺寸：200像素 * 200像素 格式：png、gif、jpg）</label>
@@ -117,6 +118,7 @@
   import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle, MdlCheckbox} from 'vue-mdl'
   import store from 'store'
   //  import Immutable from 'immutable'
+
   let initItem = [{
     key: 0, data: {
       type: 'cover',
@@ -244,6 +246,8 @@
       },
       updateFeild: function () {
         console.log(this.previews)
+      },
+      uploadFile: function () {
       }
     }
   }

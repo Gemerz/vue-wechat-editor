@@ -21,7 +21,7 @@
                         <mdl-tooltip for="pv-add-button">編輯</mdl-tooltip>
                         <i id="pv-add-button" class="material-icons">&#xE150;</i>
                       </a>
-                      <a @click="deleltePreviews(preview.key)">
+                      <a @click="deletePreviews(preview.key)">
                         <mdl-tooltip for="pv-delete-button">删除</mdl-tooltip>
                         <i id="pv-delete-button" class="material-icons">delete</i>
                       </a>
@@ -52,7 +52,7 @@
                         <mdl-tooltip :for="'edit-'+preview.key">編輯</mdl-tooltip>
                         <i :id="'edit-'+preview.key" class="material-icons">&#xE150;</i>
                       </a>
-                      <a @click="deleltePreviews(preview.key)">
+                      <a @click="deletePreviews(preview.key)">
                         <mdl-tooltip :for="'del-'+preview.key">删除</mdl-tooltip>
                         <i :id="'del-'+preview.key" class="material-icons">delete</i>
                       </a>
@@ -128,7 +128,6 @@
     watch: {
       previews: {
         handler: function (previews) {
-          console.log(previews)
           store.set('previewST', previews)
         }
       }
@@ -224,18 +223,27 @@
         }
       },
       updateFeild: function () {
-        console.log(this.previews)
+//        console.log(this.previews)
       },
-      deleltePreviews: function (key) {
-        if (key > 0) {
+      deletePreviews: function (key) {
+        if (this.previews.length > 1) {
           this.previews.splice(key, 1)
-          this._sortDelelte(key)
+          this._sortDelete(key)
         } else {
           this.$broadcast('noticePreview', {message: '最少保留一條條文信息'})
         }
       },
-      _sortDelelte: function (key) {
-
+      _sortDelete: function (key) {
+        this.previews.forEach(function (val, index) {
+          val.key = index
+          if (val.key === 0) {
+            val.data.type = 'cover'
+          } else {
+            val.data.type = 'list'
+          }
+        })
+        this.tempKey = this.previews.length
+        this.editPreview(key === this.previews.length ? key - 1 : key)
       }
     }
   }

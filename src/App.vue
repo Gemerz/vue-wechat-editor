@@ -20,8 +20,10 @@
 </script>
 
 <style lang="sass?outputStyle=expanded">
-  @import 'assets/sass/_editor.scss';
   @import '~material-design-lite/material.css';
+  @import 'assets/sass/_editor.scss';
+  @import 'assets/sass/_mdl.scss';
+
   #app{
     max-width: 980px;
     margin: 20px auto;

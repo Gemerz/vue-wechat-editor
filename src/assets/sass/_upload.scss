@@ -1,0 +1,18 @@
+.upload-field {
+  min-height: 130px;
+  padding: 0;
+  width: 100%;
+  position: relative;
+}
+
+#cover-preview {
+  padding: 90px 0;
+  img {
+    max-width: 400px;
+    height: auto;
+  }
+}
+
+.none {
+  display: none;
+}

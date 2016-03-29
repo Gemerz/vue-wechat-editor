@@ -17,7 +17,7 @@
           <i class="material-icons">&#xE864;</i>
           <input @change="uploadListCover" type="file" id="{{type}}-file_cover_img" class="none">
         </label>
-        <div id="list-preview" class="img-preivew"></div>
+        <div id="{{key}}-list-preview" class="img-preivew"></div>
       </div>
     </div>
   </div>
@@ -68,8 +68,9 @@
           _self.coverUrl = url
           _self.$dispatch('getCover', _self.coverUrl, _self.key)
         })
-        const preview = document.getElementById('list-preview')
+        const preview = document.getElementById(_self.key + '-list-preview')
         preview.innerHTML = ''
+        console.log(this.coverImage)
         if (this.coverImage) {
           preview.appendChild(this.coverImage)
         }

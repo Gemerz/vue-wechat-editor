@@ -9,7 +9,7 @@
               <div class='editor-item' v-for="preview in previews | orderBy 'key'">
                 <div v-if="preview.data.type =='cover'" class="cover-coantainer">
                   <div class='cover'>
-                    <img class='cover-img'/>
+                    <img class='cover-img' :src="preview.data.cover"/>
                     <span class='thumbnail-holder'></span>
                     <h4 class='title'>{{preview.data.title}}</h4>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
@@ -42,7 +42,9 @@
                 <div v-else class="list-coantainer">
                   <div class='list'>
                     <h4 class='list-title'>{{preview.data.title}}</h4>
-                    <span class='thumbnail'></span>
+                    <span class='thumbnail'>
+                      <img class='cover-img' :src="preview.data.cover"/>
+                    </span>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
                       <a>
                         <mdl-tooltip :for="'view-'+preview.key">浏览</mdl-tooltip>
@@ -100,7 +102,7 @@
       type: 'cover',
       title: '',
       author: '',
-      cover: '',
+      cover: '/x.jpg',
       content: ''
     }
   }]

@@ -1,5 +1,4 @@
 <template>
-
   <div class="mdl-textfield  upload-field">
     <div class="mdl-textfield mdl-js-textfield upload-field">
       <div v-show="type === 'cover'">
@@ -7,15 +6,18 @@
         <label
           class="upload-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
           <i class="material-icons">&#xE864;</i>
-          <input @change="uploadCover" type="file" id="file_cover_img" class="none">
+          <input @change="uploadCover" type="file" id="{{type}}-file_cover_img" class="none">
         </label>
-        <div id="cover-preview"></div>
+        <div id="cover-preview" class="img-preivew"></div>
       </div>
       <div v-show="type === 'list'">
         <label class="mdl-textfield__label">封面：（小图片建议尺寸：200像素 * 200像素 格式：png、gif、jpg）</label>
-        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        <label
+          class="upload-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
           <i class="material-icons">&#xE864;</i>
-        </a>
+          <input @change="uploadListCover" type="file" id="{{type}}-file_cover_img" class="none">
+        </label>
+        <div id="list-preview" class="img-preivew"></div>
       </div>
     </div>
   </div>
@@ -24,13 +26,20 @@
 <script>
   import {MdlTooltip, MdlButton, MdlTextfield} from 'vue-mdl'
   export default{
+    data () {
+      return {
+        coverImage: '',
+        coverUrl: ''
+      }
+    },
     props: {
       type: {
         type: String,
         required: true
       },
-      cover: {
-        type: String
+      key: {
+        type: Number,
+        required: true
       }
     },
     components: {
@@ -41,20 +50,39 @@
     methods: {
       uploadCover: function (e) {
         let files = e.target.files || e.dataTransfer.files
-        this._createImage(files[0])
+        let _self = this
+        this._createImage(files[0], function (url) {
+          _self.coverUrl = url
+          _self.$dispatch('getCover', _self.coverUrl, _self.key)
+        })
         const preview = document.getElementById('cover-preview')
-        if (this.cover) {
-          preview.appendChild(this.cover)
+        preview.innerHTML = ''
+        if (this.coverImage) {
+          preview.appendChild(this.coverImage)
         }
       },
-      _createImage: function (file) {
+      uploadListCover: function (e) {
+        let files = e.target.files || e.dataTransfer.files
+        let _self = this
+        this._createImage(files[0], function (url) {
+          _self.coverUrl = url
+          _self.$dispatch('getCover', _self.coverUrl, _self.key)
+        })
+        const preview = document.getElementById('list-preview')
+        preview.innerHTML = ''
+        if (this.coverImage) {
+          preview.appendChild(this.coverImage)
+        }
+      },
+      _createImage: function (file, callback) {
         let image = new window.Image()
         const fileReader = new window.FileReader()
-        fileReader.onload = function (e) {
+        fileReader.onloadend = function (e) {
+          callback(e.target.result)
           image.src = e.target.result
         }
         fileReader.readAsDataURL(file)
-        this.cover = image
+        this.coverImage = image
       }
     }
   }

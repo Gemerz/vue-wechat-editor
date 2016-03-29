@@ -137,7 +137,7 @@
       text-align: left;
       margin: 0;
     }
-    .list-title{
+    .list-title {
       padding: 8px 10px;
       display: inline-block;
       font-size: 14px;
@@ -158,6 +158,7 @@
       height: 60px;
       background: #eeeeee;
       border: 1px solid #dddddd;
+      overflow: hidden;
       &:after {
         content: '缩略图';
         display: inline-block;
@@ -166,6 +167,10 @@
         height: 100%;
         width: 100%;
         line-height: 60px;
+      }
+      img {
+        width: auto;
+        height: 100%;
       }
     }
 

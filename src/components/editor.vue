@@ -119,15 +119,29 @@
 
 <script type="text/ecmascript-6">
   import {MdlTooltip, MdlButton, MdlTextfield} from 'vue-mdl'
-  import Quill from 'quill'
+  import Quill from 'quill/dist/quill'
   export default{
     props: {
+      content: {},
+      author: {},
       formats: {
         type: Array,
         default() {
           return []
         },
-      },
+        keyBindings: {
+          type: Array,
+          default() {
+            return []
+          },
+        },
+        output: {
+          default: 'delta'
+        },
+        keyup: {
+          default: null
+        }
+      }
     },
     components: {
       MdlTooltip,
@@ -167,14 +181,12 @@
       this.editor.on('selection-change', (range) => {
         this.$dispatch('selection-change', this.editor, range)
       })
-
       if (typeof this.author !== 'undefined') {
         this.editor.addModule('authorship', {
-          authorId: this.author,
+          authorId: this.author
         })
       }
-
-      if (this.keyBindings.length) {
+      if (this.keyBindings) {
         const keyboard = this.editor.getModule('keyboard')
 
         this.keyBindings.map((binding) => {
@@ -216,7 +228,6 @@
     min-height: 350px;
     border: 1px solid #EEEEEE;
   }
-
 
 </style>
 

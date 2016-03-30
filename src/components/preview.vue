@@ -13,7 +13,7 @@
                     <span class='thumbnail-holder'></span>
                     <h4 class='title'>{{preview.data.title}}</h4>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
-                      <a>
+                      <a @click="previewCard(preview.key)">
                         <mdl-tooltip for="pv-edit-button">浏览</mdl-tooltip>
                         <i id="pv-edit-button" class="material-icons">photo</i>
                       </a>
@@ -246,6 +246,9 @@
         })
         this.tempKey = this.previews.length
         this.editPreview(key === this.previews.length ? key - 1 : key)
+      },
+      previewCard: function () {
+
       }
     }
   }

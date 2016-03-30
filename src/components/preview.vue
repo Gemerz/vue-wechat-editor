@@ -102,7 +102,7 @@
       type: 'cover',
       title: '',
       author: '',
-      cover: '/x.jpg',
+      cover: '/static/cover-default.png',
       content: ''
     }
   }]
@@ -141,7 +141,7 @@
             type: 'list',
             title: '',
             author: '',
-            cover: '',
+            cover: '/static/cover-list.png',
             content: ''
           }
         })
@@ -254,7 +254,6 @@
   .mdl-textfield {
     width: 100%;
   }
-
   .forms {
     padding: 15px;
   }

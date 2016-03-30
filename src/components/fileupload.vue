@@ -8,7 +8,9 @@
           <i class="material-icons">&#xE864;</i>
           <input @change="uploadCover" type="file" id="{{type}}-file_cover_img" class="none">
         </label>
-        <div id="cover-preview" class="img-preivew"></div>
+        <div id="cover-preview" class="img-preivew">
+          <mdl-progress :progress="progress"></mdl-progress>
+        </div>
       </div>
       <div v-show="type === 'list'">
         <label class="mdl-textfield__label">封面：（小图片建议尺寸：200像素 * 200像素 格式：png、gif、jpg）</label>
@@ -23,8 +25,8 @@
   </div>
 </template>
 
-<script>
-  import {MdlTooltip, MdlButton, MdlTextfield} from 'vue-mdl'
+<script type="text/ecmascript-6">
+  import {MdlTooltip, MdlButton, MdlTextfield, MdlProgress} from 'vue-mdl'
   export default{
     data () {
       return {
@@ -45,7 +47,8 @@
     components: {
       MdlTooltip,
       MdlButton,
-      MdlTextfield
+      MdlTextfield,
+      MdlProgress
     },
     methods: {
       uploadCover: function (e) {

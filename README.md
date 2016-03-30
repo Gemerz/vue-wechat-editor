@@ -1,9 +1,7 @@
 # A Preview Editor for Wechat
 
 ## #Intro
-
- <img src="logo.png"/>
-
+ <img src="https://github.com/Gemerz/vue-wechat-editor/blob/master/static/preview.png"/>
 ##  Setup
 
 ``` bash

@@ -8,7 +8,7 @@
       <div v-show="preview.data.type === 'cover'">
         <mdl-textfield floating-label="摘要：（选填，该摘要只在发送图文消息为单条时显示）" textarea rows="4"></mdl-textfield>
       </div>
-      <editor></editor>
+      <editor ></editor>
     </form>
   </div>
 </template>

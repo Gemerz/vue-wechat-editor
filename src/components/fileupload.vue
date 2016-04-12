@@ -9,7 +9,9 @@
           <input @change="uploadCover" type="file" id="{{type}}-file_cover_img" class="none">
         </label>
         <div id="cover-preview" class="img-preivew">
-          <mdl-progress :progress="progress"></mdl-progress>
+          <div v-show="false">
+            <mdl-progress :progress="80" ></mdl-progress>
+          </div>
         </div>
       </div>
       <div v-show="type === 'list'">

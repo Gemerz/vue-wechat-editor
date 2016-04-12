@@ -9,12 +9,16 @@
         <mdl-textfield floating-label="摘要：（选填，该摘要只在发送图文消息为单条时显示）" textarea rows="4"></mdl-textfield>
       </div>
       <editor :content.sync="preview.data.content"></editor>
+      <div class="submit-btn">
+        <mdl-button class="mdl-js-ripple-effect" colored primary raised>提交</mdl-button>
+      </div>
+
     </form>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {MdlTooltip, MdlButton, MdlTextfield} from 'vue-mdl'
+  import {MdlTooltip, MdlButton, MdlTextfield,directives} from 'vue-mdl'
   import FileUpload from './fileupload.vue'
   import Editor from './editor.vue'
   export default{
@@ -32,7 +36,9 @@
       MdlTooltip,
       MdlButton,
       MdlTextfield,
+      directives,
       FileUpload,
+
       Editor
     },
     methods: {},

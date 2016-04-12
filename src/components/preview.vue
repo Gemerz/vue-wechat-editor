@@ -92,11 +92,10 @@
 
 
   <div v-if="editedPreview !== null" class="editpreviewcard">
-    <mdl-dialog title="Hi there" display-on="infoMessage" cancellable>
-      <h5>{{editedPreview.data.title}}</h5>
-      <img :src="editedPreview.data.cover" style="max-width: 350px;">
-      {{editedPreview.data.content}}
-      <mdl-card class="demo-card-welcome" title="Welcome"   actions-text="Get started"></mdl-card>
+    <mdl-dialog title="預覽" display-on="infoMessage" cancellable>
+      <mdl-card class="demo-card-welcome" :title="editedPreview.data.title ? editedPreview.data.title:' '"
+                :supporting-text="editedPreview.data.content?editedPreview.data.content:' '"
+                :media="editedPreview.data.cover"></mdl-card>
     </mdl-dialog>
   </div>
 
@@ -283,8 +282,11 @@
   .mdl-textfield {
     width: 100%;
   }
-
   .forms {
     padding: 15px;
+  }
+
+  .mdl-card__media img {
+    max-width: 100%;
   }
 </style>

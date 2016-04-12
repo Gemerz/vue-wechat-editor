@@ -7,7 +7,7 @@
             <div class="active-arrow" :style="{ top: activeArrowStyle + 'px' }"></div>
             <div class="editor-preview">
               <div class='editor-item' v-for="preview in previews | orderBy 'key'">
-                <div v-if="preview.data.type =='cover'" class="cover-coantainer">
+                <div v-if="preview.data.type =='cover'" class="cover-container">
                   <div class='cover'>
                     <img class='cover-img' :src="preview.data.cover"/>
                     <span class='thumbnail-holder'></span>
@@ -89,10 +89,31 @@
     <forms :previews="previews" :current-index="currentKey"></forms>
   </div>
   <mdl-snackbar display-on="noticePreview"></mdl-snackbar>
+
+
+  <div v-if="editedPreview !== null" class="editpreviewcard">
+    <mdl-dialog title="Hi there" display-on="infoMessage" cancellable>
+      <h5>{{editedPreview.data.title}}</h5>
+      <img :src="editedPreview.data.cover" style="max-width: 350px;">
+      {{editedPreview.data.content}}
+      <mdl-card class="demo-card-welcome" title="Welcome"   actions-text="Get started"></mdl-card>
+    </mdl-dialog>
+  </div>
+
+
 </template>
 
 <script>
-  import {MdlTooltip, MdlButton, MdlTextfield, MdlIconToggle, MdlCheckbox, MdlSnackbar} from 'vue-mdl'
+  import {
+    MdlTooltip,
+    MdlButton,
+    MdlTextfield,
+    MdlIconToggle,
+    MdlCheckbox,
+    MdlSnackbar,
+    MdlDialog,
+    MdlCard
+  } from 'vue-mdl'
   import store from 'store'
   import forms from './forms.vue'
   //  import Immutable from 'immutable'
@@ -125,6 +146,8 @@
       MdlIconToggle,
       MdlCheckbox,
       MdlSnackbar,
+      MdlDialog,
+      MdlCard,
       forms
     },
     watch: {
@@ -247,8 +270,11 @@
         this.tempKey = this.previews.length
         this.editPreview(key === this.previews.length ? key - 1 : key)
       },
-      previewCard: function () {
-
+      previewCard: function (key) {
+        this.editPreview(key)
+        if (this.editedPreview !== null) {
+          this.$broadcast('infoMessage')
+        }
       }
     }
   }
@@ -257,6 +283,7 @@
   .mdl-textfield {
     width: 100%;
   }
+
   .forms {
     padding: 15px;
   }

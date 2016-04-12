@@ -4,7 +4,7 @@
       <mdl-textfield floating-label="标题：" :value.sync="preview.data.title"></mdl-textfield>
       <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
 
-      <file-upload :key="preview.key" :type="preview.data.type"></file-upload>
+      <file-upload action="http://77g2a9.com1.z0.glb.clouddn.com" :key="preview.key" :type="preview.data.type"></file-upload>
       <div v-show="preview.data.type === 'cover'">
         <mdl-textfield floating-label="摘要：（选填，该摘要只在发送图文消息为单条时显示）" textarea rows="4"></mdl-textfield>
       </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {MdlTooltip, MdlButton, MdlTextfield,directives} from 'vue-mdl'
+  import {MdlTooltip, MdlButton, MdlTextfield, directives} from 'vue-mdl'
   import FileUpload from './fileupload.vue'
   import Editor from './editor.vue'
   export default{

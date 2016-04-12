@@ -10,7 +10,7 @@
         </label>
         <div id="cover-preview" class="img-preivew">
           <div v-show="false">
-            <mdl-progress :progress="80" ></mdl-progress>
+            <mdl-progress :progress="80"></mdl-progress>
           </div>
         </div>
       </div>
@@ -33,7 +33,8 @@
     data () {
       return {
         coverImage: '',
-        coverUrl: ''
+        coverUrl: '',
+        headers: ''
       }
     },
     props: {
@@ -43,6 +44,10 @@
       },
       key: {
         type: Number,
+        required: true
+      },
+      action: {
+        type: String,
         required: true
       }
     },
@@ -64,6 +69,7 @@
         preview.innerHTML = ''
         if (this.coverImage) {
           preview.appendChild(this.coverImage)
+          this._handleUpload(files)
         }
       },
       uploadListCover: function (e) {
@@ -75,7 +81,6 @@
         })
         const preview = document.getElementById(_self.key + '-list-preview')
         preview.innerHTML = ''
-        console.log(this.coverImage)
         if (this.coverImage) {
           preview.appendChild(this.coverImage)
         }
@@ -89,6 +94,58 @@
         }
         fileReader.readAsDataURL(file)
         this.coverImage = image
+      },
+      _onProgress: function (e) {
+        // this is an internal call in XHR to update the progress
+        e.percent = (e.loaded / e.total) * 100;
+        this.$dispatch('onFileProgress', e);
+      },
+      _handleUpload: function (file) {
+        this.$dispatch('beforeFileUpload', file);
+        var form = new FormData();
+        var xhr = new XMLHttpRequest();
+        try {
+          form.append('Content-Type', file.type || 'application/octet-stream');
+          // our request will have the file in the ['file'] key
+          form.append('file', file);
+        } catch (err) {
+          this.$dispatch('onFileError', file, err);
+          return;
+        }
+        return new Promise(function (resolve, reject) {
+          xhr.upload.addEventListener('progress', this._onProgress, false);
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState < 4) {
+              return;
+            }
+            if (xhr.status < 400) {
+              var res = JSON.parse(xhr.responseText);
+              this.$dispatch('onFileUpload', file, res);
+              resolve(file);
+            } else {
+              var err = JSON.parse(xhr.responseText);
+              err.status = xhr.status;
+              err.statusText = xhr.statusText;
+              this.$dispatch('onFileError', file, err);
+              reject(err);
+            }
+          }.bind(this)
+          xhr.onerror = function () {
+            var err = JSON.parse(xhr.responseText);
+            err.status = xhr.status;
+            err.statusText = xhr.statusText;
+            this.$dispatch('onFileError', file, err);
+            reject(err);
+          }.bind(this);
+          xhr.open('POST', this.action, true);
+          if (this.headers) {
+            for (var header in this.headers) {
+              xhr.setRequestHeader(header, this.headers[header])
+            }
+          }
+          console.log(form)
+          this.$dispatch('afterFileUpload', file)
+        }.bind(this))
       }
     }
   }

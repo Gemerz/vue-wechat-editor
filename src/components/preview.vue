@@ -141,7 +141,6 @@
     components: {
       MdlTooltip,
       MdlButton,
-      MdlCard,
       MdlTextfield,
       MdlIconToggle,
       MdlCheckbox,

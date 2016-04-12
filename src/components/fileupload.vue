@@ -69,7 +69,7 @@
         preview.innerHTML = ''
         if (this.coverImage) {
           preview.appendChild(this.coverImage)
-          this._handleUpload(files)
+          this._getUpToken()
         }
       },
       uploadListCover: function (e) {
@@ -94,6 +94,18 @@
         }
         fileReader.readAsDataURL(file)
         this.coverImage = image
+      },
+      _getUpToken: function () {
+        var xhr = new XMLHttpRequest()
+        if (this.action) {
+          xhr.open('GET', this.action, false)
+          xhr.setRequestHeader("If-Modified-Since", "0")
+          xhr.send()
+          if (xhr.status === 200) {
+            let res = this._parseJSON(xhr.responseText)
+            console.log(res)
+          }
+        }
       },
       _onProgress: function (e) {
         // this is an internal call in XHR to update the progress
@@ -143,9 +155,45 @@
               xhr.setRequestHeader(header, this.headers[header])
             }
           }
-          console.log(form)
+
           this.$dispatch('afterFileUpload', file)
         }.bind(this))
+      },
+      _parseJSON: function (data) {
+        // Attempt to parse using the native JSON parser first
+        if (window.JSON && window.JSON.parse) {
+          return window.JSON.parse(data);
+        }
+
+        //var rx_one = /^[\],:{}\s]*$/,
+        //    rx_two = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,
+        //    rx_three = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,
+        //    rx_four = /(?:^|:|,)(?:\s*\[)+/g,
+        var rx_dangerous = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+
+        //var json;
+
+        var text = String(data);
+        rx_dangerous.lastIndex = 0;
+        if (rx_dangerous.test(text)) {
+          text = text.replace(rx_dangerous, function (a) {
+            return '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+          });
+        }
+
+        // todo 使用一下判断,增加安全性
+        //if (
+        //    rx_one.test(
+        //        text
+        //            .replace(rx_two, '@')
+        //            .replace(rx_three, ']')
+        //            .replace(rx_four, '')
+        //    )
+        //) {
+        //    return eval('(' + text + ')');
+        //}
+
+        return eval('(' + text + ')');
       }
     }
   }

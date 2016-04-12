@@ -46,7 +46,7 @@
                       <img class='cover-img' :src="preview.data.cover"/>
                     </span>
                     <div class='editor-item-edit' @click="editPreview(preview.key)">
-                      <a>
+                      <a @click="previewCard(preview.key)">
                         <mdl-tooltip :for="'view-'+preview.key">浏览</mdl-tooltip>
                         <i :id="'view-'+preview.key" class="material-icons">photo</i>
                       </a>
@@ -141,6 +141,7 @@
     components: {
       MdlTooltip,
       MdlButton,
+      MdlCard,
       MdlTextfield,
       MdlIconToggle,
       MdlCheckbox,
@@ -153,6 +154,11 @@
       previews: {
         handler: function (previews) {
           store.set('previewST', previews)
+        }
+      },
+      infoMessage: {
+        handler: function (editedPreview) {
+          this.editedPreview = editedPreview
         }
       }
     },

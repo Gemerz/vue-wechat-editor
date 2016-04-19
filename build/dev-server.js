@@ -2,20 +2,21 @@ var express = require('express')
 var webpack = require('webpack')
 var config = require('./webpack.dev.conf')
 var proxyMiddleware = require('http-proxy-middleware')
-
+var config_qiniu = require('./config_qiniu.js')
+var qiniu = require('qiniu')
 var app = express()
 var compiler = webpack(config)
 
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = {
-  // '/api': {
-  //   target: 'http://jsonplaceholder.typicode.com',
-  //   changeOrigin: true,
-  //   pathRewrite: {
-  //     '^/api': ''
-  //   }
-  // }
+  '/uptoken': {
+    target: 'http://localhost:19110/uptoken',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/uptoken': ''
+    }
+  }
 }
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -30,7 +31,7 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler)
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
+    hotMiddleware.publish({action: 'reload'})
     cb()
   })
 })
@@ -39,7 +40,7 @@ compiler.plugin('compilation', function (compilation) {
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
-    options = { target: options }
+    options = {target: options}
   }
   app.use(proxyMiddleware(context, options))
 })

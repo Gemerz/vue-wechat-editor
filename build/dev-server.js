@@ -10,13 +10,13 @@ var compiler = webpack(config)
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = {
-  '/uptoken': {
-    target: 'http://localhost:19110/uptoken',
-    changeOrigin: true,
-    pathRewrite: {
-      '^/uptoken': ''
-    }
-  }
+  // '/uptoken': {
+  //   target: 'http://localhost:19110/uptoken',
+  //   changeOrigin: true,
+  //   pathRewrite: {
+  //     '^/uptoken': ''
+  //   }
+  // }
 }
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

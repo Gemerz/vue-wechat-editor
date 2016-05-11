@@ -1,37 +1,27 @@
 <style lang="sass?outputStyle=expanded">
+  @import '~material-design-lite/material.css';
+  @import 'assets/sass/_editor.scss';
+  @import 'assets/sass/_mdl.scss';
 
-@import '~material-design-lite/material.css';
-@import 'assets/sass/_editor.scss';
-@import 'assets/sass/_mdl.scss';
-#app {
+  #app {
     max-width: 980px;
     margin: 20px auto;
     display: block;
-}
-
+  }
 </style>
-
 <template>
-
-<div id="app">
+  <div id="app">
     <div class="mdl-grid">
-        <preview></preview>
-
+      <preview></preview>
     </div>
-
-</div>
-
+  </div>
 </template>
-
 <script>
-
-import Preview from './components/preview'
-import 'material-design-lite/material'
-
-export default {
+  import Preview from './components/preview'
+  import 'material-design-lite/material'
+  export default {
     components: {
-        Preview
+      Preview
     }
-}
-
+  }
 </script>

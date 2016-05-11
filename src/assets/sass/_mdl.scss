@@ -1,10 +1,29 @@
-.mdl-button--raised.mdl-button--colored{
+.mdl-button--raised.mdl-button--colored {
   background: #a1f089;
   color: #ffffff;
 }
-.upload-field{
+
+.upload-field {
   min-height: 110px;
 }
-.mdl-snackbar__text{
+
+.mdl-snackbar__text {
   text-align: center;
+}
+.card-previews{
+  width: 430px;
+}
+.card-preview {
+  max-height: 350px;
+  overflow-y: scroll;
+  .mdl-card__media{
+    background: none;
+  }
+  .mdl-card__supporting-text {
+
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
 }

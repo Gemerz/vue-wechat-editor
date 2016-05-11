@@ -105,9 +105,20 @@
   <mdl-snackbar display-on="noticePreview"></mdl-snackbar>
   <div v-if="editedPreview !== null" class="editpreviewcard">
     <mdl-dialog title="預覽" display-on="infoMessage" cancellable>
-      <mdl-card class="demo-card-welcome" :title="editedPreview.data.title ? editedPreview.data.title:' '"
-                :supporting-text="editedPreview.data.content?editedPreview.data.content:' '"
-                :media="editedPreview.data.cover"></mdl-card>
+      <!--<mdl-card class="demo-card-welcome" :title="editedPreview.data.title ? editedPreview.data.title:' '"-->
+      <!--:media="editedPreview.data.cover"-->
+      <!--:supporting-text="editedPreview.data.content?editedPreview.data.content:' '"></mdl-card>-->
+      <div class="mdl-card mdl-shadow--2dp card-previews">
+        <div class="card-preview">
+          <div class="mdl-card__title"><p class="mdl-card__title-text">{{editedPreview.data.title }}</p></div>
+          <div class="mdl-card__media">
+            <img :src="editedPreview.data.cover">
+          </div>
+          <div class="mdl-card__supporting-text">
+            {{{ editedPreview.data.content }}}
+          </div>
+        </div>
+      </div>
     </mdl-dialog>
   </div>
 

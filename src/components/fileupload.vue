@@ -75,7 +75,7 @@
         preview.innerHTML = ''
         if (this.coverImage) {
           preview.appendChild(this.coverImage)
-          this._getUpToken()
+//          this._getUpToken()
         }
       },
       uploadListCover: function (e) {

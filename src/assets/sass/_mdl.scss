@@ -14,7 +14,7 @@
   width: 430px;
 }
 .card-preview {
-  max-height: 350px;
+  max-height: 400px;
   overflow-y: scroll;
   .mdl-card__media{
     background: none;
@@ -26,4 +26,7 @@
       max-width: 100%;
     }
   }
+}
+::-webkit-scrollbar {
+  display: none;
 }

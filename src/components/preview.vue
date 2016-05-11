@@ -103,11 +103,8 @@
     <forms :previews="previews" :current-index="currentKey"></forms>
   </div>
   <mdl-snackbar display-on="noticePreview"></mdl-snackbar>
-  <div v-if="editedPreview !== null" class="editpreviewcard">
-    <mdl-dialog title="預覽" display-on="infoMessage" cancellable>
-      <!--<mdl-card class="demo-card-welcome" :title="editedPreview.data.title ? editedPreview.data.title:' '"-->
-      <!--:media="editedPreview.data.cover"-->
-      <!--:supporting-text="editedPreview.data.content?editedPreview.data.content:' '"></mdl-card>-->
+  <div v-if="editedPreview !== ''" class="editpreviewcard">
+    <mdl-dialog title="預覽" display-on="infoMessage" >
       <div class="mdl-card mdl-shadow--2dp card-previews">
         <div class="card-preview">
           <div class="mdl-card__title"><p class="mdl-card__title-text">{{editedPreview.data.title }}</p></div>
@@ -119,6 +116,10 @@
           </div>
         </div>
       </div>
+      <template slot="actions">
+        <mdl-button>關閉</mdl-button>
+      </template>
+
     </mdl-dialog>
   </div>
 

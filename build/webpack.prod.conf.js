@@ -4,6 +4,7 @@ var baseConfig = require('./webpack.base.conf')
 var cssLoaders = require('./css-loaders')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ManifestPlugin = require('webpack-manifest-plugin')
 
 // whether to generate source map for production files.
 // disabling this can speed up the build.
@@ -55,6 +56,10 @@ module.exports = merge(baseConfig, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       }
+    }),
+    new ManifestPlugin({
+      fileName: 'my-manifest.json',
+      basePath: '/'
     })
   ]
 })

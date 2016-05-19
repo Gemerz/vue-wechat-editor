@@ -1,20 +1,20 @@
 <template>
 
   <div class="forms" v-for="preview in previews" v-show="preview.key ===currentIndex">
-    <form>
-      <mdl-textfield floating-label="标题：" :value.sync="preview.data.title"></mdl-textfield>
-      <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
+      <form v-on:submit.prevent="onSubmit">
+        <mdl-textfield floating-label="标题：" :value.sync="preview.data.title"></mdl-textfield>
+        <mdl-textfield floating-label="作者：（选填）">{{preview.data.author}}</mdl-textfield>
 
-      <file-upload action="http://77g2a9.com1.z0.glb.clouddn.com" :key="preview.key"
-                   :type="preview.data.type"></file-upload>
-      <div v-show="preview.data.type === 'cover'">
-        <mdl-textfield floating-label="摘要：（选填，该摘要只在发送图文消息为单条时显示）" textarea rows="4"></mdl-textfield>
-      </div>
-      <editor :content.sync="preview.data.content"></editor>
-      <div class="submit-btn">
-        <mdl-button class="mdl-js-ripple-effect" colored primary raised>提交</mdl-button>
-      </div>
-    </form>
+        <file-upload action="http://77g2a9.com1.z0.glb.clouddn.com" :key="preview.key"
+                     :type="preview.data.type"></file-upload>
+        <div v-show="preview.data.type === 'cover'">
+          <mdl-textfield floating-label="摘要：（选填，该摘要只在发送图文消息为单条时显示）" textarea rows="4"></mdl-textfield>
+        </div>
+        <editor :content.sync="preview.data.content"></editor>
+        <div class="submit-btn">
+          <mdl-button :click="onSubmit" class="mdl-js-ripple-effect" colored primary raised>提交</mdl-button>
+        </div>
+      </form>
   </div>
 
 </template>
@@ -45,7 +45,11 @@
       FileUpload,
       Editor
     },
-    methods: {},
+    methods: {
+      onSubmit: function () {
+        console.log(this.previews);
+      }
+    },
     events: {
       getCover: function (url, key) {
         this.previews.map((items) => {

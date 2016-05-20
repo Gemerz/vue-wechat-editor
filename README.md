@@ -1,6 +1,6 @@
 # A Preview Editor for Wechat
 
-## #Intro
+##  Intro
  <img src="https://github.com/Gemerz/vue-wechat-editor/blob/master/static/preview.png"/>
 ##  Setup
 
@@ -8,7 +8,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:5000
 npm run dev
 
 # build for production with minification
@@ -23,6 +23,14 @@ npm run e2e
 # run all tests
 npm test
 ```
+####Improvements
+- [x] finish test specs
+- [x] change WYSIWYG editor or build own editor with vuejs
+- [x] add wechat api.
+- [x] add wechat node backend environment.
+- [x] switch to `ES6`
 
-For detailed explanation on how things work, checkout the [guide](https://github.com/vuejs-templates/webpack#vue-webpack-boilerplate) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# License
+[MIT](http://opensource.org/licenses/MIT)
 
+Copyright (c) 2016 Gemer Zhang

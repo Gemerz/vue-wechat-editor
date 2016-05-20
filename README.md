@@ -26,6 +26,7 @@ npm test
 ####Improvements
 - [x] finish test specs
 - [x] change WYSIWYG editor or build own editor with vuejs
+- [x] improve uploader.
 - [x] add wechat api.
 - [x] add wechat node backend environment.
 - [x] switch to `ES6`

@@ -1,5 +1,7 @@
 # A Preview Editor for Wechat
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Gemerz/vue-wechat-editor.svg)](https://greenkeeper.io/)
+
 ##  Intro
  <img src="https://github.com/Gemerz/vue-wechat-editor/blob/master/static/preview.png"/>
 ##  Setup
